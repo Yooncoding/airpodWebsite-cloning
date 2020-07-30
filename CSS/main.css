@@ -2,9 +2,11 @@
 
 * {
   /* Font Size */
-  --font-large: 10px;
+  --font-basic: 14px;
   /* Color */
-  --color-white: white;
+  --color-black: rgb(29, 29, 31);
+  --color-white: #ffffff;
+  --color-grey: #ddd;
   /* Padding Size */
   --padding-large: 10px;
 }
@@ -16,20 +18,57 @@ html {
 body {
   /* overflow-x : hidden을 하면 x축 넘기는건 가리므로 가로스크롤이 안생김 */
   overflow-x: hidden;
-  color: rgb(29, 29, 31);
+  color: var(--color-black);
   letter-spacing: -0.05em;
   background-color: var(--color-white);
+  font-size: var(--font-basic);
 }
 
 ul {
   list-style: none;
-  display: flex;
 }
 
 a {
   text-decoration: none;
+  color: var(--color-black);
 }
 
 p {
   line-height: 1.6;
+}
+
+.global_navbar {
+  height: 44px;
+}
+
+.local_navbar {
+  height: 52px;
+  border-bottom: 1px solid var(--color-grey);
+}
+
+.global_navbar_list,
+.local_navbar_list {
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.global_navbar_list {
+  justify-content: space-between;
+}
+
+.local_navbar_list li:first-child {
+  margin-right: auto;
+}
+
+.local_navbar_list a:not(.local_navbar_name) {
+  margin-left: 2em;
+  font-size: 0.8rem;
+}
+
+.local_navbar_name {
+  font-weight: bold;
+  font-size: 1.4rem;
 }
