@@ -1,0 +1,35 @@
+@charset 'utf-8';
+
+* {
+  /* Font Size */
+  --font-large: 10px;
+  /* Color */
+  --color-white: white;
+  /* Padding Size */
+  --padding-large: 10px;
+}
+
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+  /* overflow-x : hidden을 하면 x축 넘기는건 가리므로 가로스크롤이 안생김 */
+  overflow-x: hidden;
+  color: rgb(29, 29, 31);
+  letter-spacing: -0.05em;
+  background-color: var(--color-white);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.6;
+}
