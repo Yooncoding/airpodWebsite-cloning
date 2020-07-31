@@ -6,13 +6,15 @@
   /* Color */
   --color-black: rgb(29, 29, 31);
   --color-white: #ffffff;
-  --color-grey: #ddd;
+  --color-light-grey: #ddd;
+  --color-grey: #888;
   /* Padding Size */
   --padding-large: 10px;
 }
 
 html {
   font-family: 'Noto Sans KR', sans-serif;
+  font-size: var(--font-basic);
 }
 
 body {
@@ -21,7 +23,6 @@ body {
   color: var(--color-black);
   letter-spacing: -0.05em;
   background-color: var(--color-white);
-  font-size: var(--font-basic);
 }
 
 ul {
@@ -39,10 +40,12 @@ p {
 
 .global_navbar {
   height: 44px;
+  padding: 0 1rem;
 }
 
 .local_navbar {
   height: 52px;
+  padding: 0 1rem;
   border-bottom: 1px solid var(--color-grey);
 }
 
@@ -71,4 +74,41 @@ p {
 .local_navbar_name {
   font-weight: bold;
   font-size: 1.4rem;
+}
+
+.scroll_section {
+  padding-top: 50vh;
+}
+
+#scroll_section-first h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.main_mention {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  font-size: 2.5rem;
+  margin-top: 5px;
+}
+
+.main_mention p {
+  line-height: 1.2;
+  text-align: center;
+  font-weight: bold;
+}
+
+#scroll_section-second p {
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: var(--color-grey);
+}
+
+#scroll_section-second p strong {
+  float: left;
+  margin-right: 0.2em;
+  font-size: 3rem;
+  color: var(--color-black);
 }
