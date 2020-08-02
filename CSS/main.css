@@ -189,6 +189,22 @@ p {
   color: var(--color-grey);
 }
 
+/* Center Mention */
+.center_mention {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#show_scene-first #scroll_section-first .center_mention,
+#show_scene-second #scroll_section-second .center_mention,
+#show_scene-third #scroll_section-third .center_mention {
+  display: block;
+}
+
+/* DeskTop Responsive */
 @media (min-width:1024px) {
   #scroll_section-first h1 {
     font-size: 9vw;
