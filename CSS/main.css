@@ -8,6 +8,7 @@
   --color-white: #ffffff;
   --color-light-grey: #ddd;
   --color-grey: #888;
+  --color-dark-grey: #A1A1A6;
   /* Padding Size */
   --padding-large: 10px;
 }
@@ -101,6 +102,8 @@ p {
 }
 
 #scroll_section-second p {
+  margin: 0 auto;
+  max-width: 1000px;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: var(--color-grey);
@@ -111,4 +114,115 @@ p {
   margin-right: 0.2em;
   font-size: 3rem;
   color: var(--color-black);
+}
+
+
+.description {
+  font-size: 3.5rem;
+}
+
+.description small {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 1.2rem;
+}
+
+.desc_mention {
+  font-weight: bold;
+  width: 50%;
+}
+
+.pin {
+  width: 1px;
+  height: 100px;
+  background-color: var(--color-black);
+}
+
+.simple_mention {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 0 1rem;
+  font-size: 2rem;
+  color: var(--color-grey);
+}
+
+.simple_mention strong {
+  color: var(--color-black);
+}
+
+.canvas_mention {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: var(--color-grey);
+  text-align: center;
+}
+
+.footer {
+  border-top: 1px solid var(--color-light-grey);
+  padding: 0 1rem 0.6rem 1rem;
+  max-width: 1000px;
+  margin: 0.4rem auto 0;
+}
+
+.footer_mention {
+  color: var(--color-dark-grey);
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.footer_list {
+  display: flex;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.footer_item:not(.footer_item-last) {
+  color: var(--color-grey);
+  padding-right: 0.5rem;
+  margin-right: 0.3rem;
+  border-right: 1px solid var(--color-grey);
+}
+
+.footer_item-last {
+  color: var(--color-grey);
+}
+
+@media (min-width:1024px) {
+  #scroll_section-first h1 {
+    font-size: 9vw;
+  }
+
+  .main_mention {
+    font-size: 4vw;
+  }
+
+  #scroll_section-second p {
+    font-size: 2rem;
+  }
+
+  #scroll_section-second p strong {
+    font-size: 6rem;
+  }
+
+  .description {
+    font-size: 6vw;
+  }
+
+  .description small {
+    font-size: 1.5vw;
+  }
+
+  .desc_mention {
+    width: 20%;
+  }
+
+  .simple_mention {
+    font-size: 4vw;
+  }
+
+  .canvas_mention {
+    font-size: 2rem;
+  }
 }
