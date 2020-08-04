@@ -1,4 +1,10 @@
 (() => {
+  // window.pageYOffset; 대신 쓰일 변수
+  let yOffSet = 0;
+  // currentScene의 이전 섹션높이들의 합
+  let prevScrollHeight = 0;
+  // 현재 보여지는 scoll_section
+  let currentScenen = 0;
   const sceneInfo = [{
       // scroll_section-first
       type: 'sticky',
@@ -53,6 +59,29 @@
       sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
     }
   }
+
+  function scrollLoop() {
+    // 현재 scroll위치에 따라 section 구분
+    prevScrollHeight = 0;
+    // for문은 i가 1 이상일때 부터 시행
+    for (let i = 0; i < currentScenen; i++) {
+      prevScrollHeight = prevScrollHeight + sceneInfo[currentScenen].scrollHeight;
+    }
+    // c가 0일때 prevScrollHeight는 0,sceneInfo[currentScenen].scrollHeight)는 4090이다.
+    if (yOffSet > prevScrollHeight + sceneInfo[currentScenen].scrollHeight) {
+      currentScenen++;
+    }
+    if (yOffSet < prevScrollHeight) {
+      currentScenen--;
+    }
+  }
+
   window.addEventListener('resize', setSectionHeight);
+  window.addEventListener('scroll', () => {
+    yOffSet = window.pageYOffset;
+    scrollLoop();
+  });
+
+
   setSectionHeight();
 })();
