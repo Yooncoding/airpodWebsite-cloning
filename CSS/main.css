@@ -208,9 +208,10 @@ p {
   width: 100%;
 }
 
-#show_scene-first #scroll_section-first .center_mention,
-#show_scene-second #scroll_section-second .center_mention,
-#show_scene-third #scroll_section-third .center_mention {
+#show_scene-0 #scroll_section-first .center_mention,
+#show_scene-1 #scroll_section-second .center_mention,
+#show_scene-2 #scroll_section-third .center_mention,
+#show_scene-3 #scroll_section-forth .center_mention {
   display: block;
 }
 
