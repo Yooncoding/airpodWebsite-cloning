@@ -11,7 +11,14 @@
       scrollHeight: 0,
       heightNum: 5,
       objs: {
-        container: document.querySelector('#scroll_section-first')
+        container: document.querySelector('#scroll_section-first'),
+        mentionFirst: document.querySelector('#scroll_section-first .main_mention.first'),
+        mentionSecond: document.querySelector('#scroll_section-first .main_mention.second'),
+        mentionThird: document.querySelector('#scroll_section-first .main_mention.third'),
+        mentionForth: document.querySelector('#scroll_section-first .main_mention.forth')
+      },
+      values: {
+        mentionFirst_opacity: [0, 1]
       }
     },
     {
@@ -91,9 +98,38 @@
     }
   }
 
+  function clacValuese(values, currentYOffset) {
+    // 여기 들어가는 변수는 values 오브젝트
+
+
+  }
+
+  function playAnimation() {
+    const objs = sceneInfo[currentScene].objs;
+    const values = sceneInfo[currentScene].values;
+    const currentYOffset = yOffSet - prevScrollHeight;
+    // console.log(currentScene, currentYOffset);
+    switch (currentScene) {
+      case 0:
+        let mentionFirst_opacity_0 = values.mentionFirst_opacity[0];
+        let mentionFirst_opacity_1 = values.mentionFirst_opacity[1];
+        console.log((clacValuese(values, currentYOffset)));
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+    }
+
+  }
   window.addEventListener('scroll', () => {
     yOffSet = window.pageYOffset;
     scrollLoop();
+    playAnimation();
   });
   window.addEventListener('resize', setSectionHeight);
   window.addEventListener('load', setSectionHeight);
