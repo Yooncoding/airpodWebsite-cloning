@@ -103,6 +103,7 @@ p {
   height: 3em;
   font-size: 2.5rem;
   margin-top: 5px;
+  opacity: 0;
 }
 
 .main_mention p {

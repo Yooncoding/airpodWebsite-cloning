@@ -5,6 +5,8 @@
   let prevScrollHeight = 0;
   // 현재 보여지는 scoll_section
   let currentScene = 0;
+  // scene 바뀌는 곳 체크 
+  let enterNewScene = false;
   const sceneInfo = [{
       // scroll_section-first
       type: 'sticky',
@@ -82,26 +84,32 @@
   function scrollLoop() {
     // 현재 scroll위치에 따라 section 구분
     prevScrollHeight = 0;
+    enterNewScene = false;
     // for문은 i가 1 이상일때 부터 시행
     for (let i = 0; i < currentScene; i++) {
       prevScrollHeight = prevScrollHeight + sceneInfo[currentScene].scrollHeight;
     }
     // c가 0일때 prevScrollHeight는 0,sceneInfo[currentScene].scrollHeight)는 4090이다.
     if (yOffSet > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+      enterNewScene = true;
       currentScene++;
       document.body.setAttribute('id', `show_scene-${currentScene}`);
     }
     if (yOffSet < prevScrollHeight) {
       if (yOffSet == 0) return;
+      enterNewScene = true;
       currentScene--;
       document.body.setAttribute('id', `show_scene-${currentScene}`);
     }
+    // scene 바뀌는 곳에서 한번 scrollLoop 탈출 -> 일시적으로 바뀌는부분에서 -가 나오므로 그떼 playAnimaitionn 실행 않도록
+    if (enterNewScene) return;
+    playAnimation();
   }
 
+  // 여기 들어가는 변수는 values 오브젝트
   function clacValuese(values, currentYOffset) {
-    // 여기 들어가는 변수는 values 오브젝트
-
-
+    let scrollRatio = currentYOffset / sceneInfo[currentScene].scrollHeight;
+    return scrollRatio * (values[1] - values[0]) + values[0];
   }
 
   function playAnimation() {
@@ -111,9 +119,9 @@
     // console.log(currentScene, currentYOffset);
     switch (currentScene) {
       case 0:
-        let mentionFirst_opacity_0 = values.mentionFirst_opacity[0];
-        let mentionFirst_opacity_1 = values.mentionFirst_opacity[1];
-        console.log((clacValuese(values, currentYOffset)));
+        let mentionFirst_opacity_in = clacValuese(values.mentionFirst_opacity, currentYOffset);
+        objs.mentionFirst.style.opacity = mentionFirst_opacity_in;
+        console.log((clacValuese(values.mentionFirst_opacity, currentYOffset)));
         break;
       case 1:
         break;
@@ -129,7 +137,6 @@
   window.addEventListener('scroll', () => {
     yOffSet = window.pageYOffset;
     scrollLoop();
-    playAnimation();
   });
   window.addEventListener('resize', setSectionHeight);
   window.addEventListener('load', setSectionHeight);
