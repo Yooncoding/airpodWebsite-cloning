@@ -100,6 +100,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  top: 35vh;
   height: 3em;
   font-size: 2.5rem;
   margin-top: 5px;
@@ -204,7 +205,6 @@ p {
 .center_mention {
   display: none;
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
 }
