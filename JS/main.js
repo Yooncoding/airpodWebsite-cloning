@@ -7,8 +7,7 @@
   let currentScene = 0;
   // scene 바뀌는 곳 체크
   let enterNewScene = false;
-  const sceneInfo = [
-    {
+  const sceneInfo = [{
       // scroll_section-first
       type: "sticky",
       scrollHeight: 0,
@@ -157,7 +156,7 @@
       // scroll_section-second
       type: "normal",
       scrollHeight: 0,
-      heightNum: 5,
+      // heightNum: 5, //type: "normal"에선 있으나 마나
       objs: {
         container: document.querySelector("#scroll_section-second"),
       },
@@ -184,7 +183,7 @@
       // scroll_section-fifth
       type: "normal",
       scrollHeight: 0,
-      heightNum: 5,
+      // heightNum: 5, //type: "normal"에선 있으나 마나
       objs: {
         container: document.querySelector("#scroll_section-fifth"),
       },
@@ -274,52 +273,36 @@
     switch (currentScene) {
       case 0:
         // mentionFirst 세팅
-        let mentionFirst_opacity_in = clacValuese(values.mentionFirst_opacity_in, currentYOffset);
-        let mentionFirst_opacity_out = clacValuese(values.mentionFirst_opacity_out, currentYOffset);
-        let mentionFirst_translateY_in = clacValuese(values.mentionFirst_translateY_in, currentYOffset);
-        let mentionFirst_translateY_out = clacValuese(values.mentionFirst_translateY_out, currentYOffset);
         if (scrollRatio <= 0.22) {
-          objs.mentionFirst.style.opacity = mentionFirst_opacity_in;
-          objs.mentionFirst.style.transform = `translateY(${mentionFirst_translateY_in}%)`;
+          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);;
+          objs.mentionFirst.style.transform = `translateY(${clacValuese(values.mentionFirst_translateY_in, currentYOffset)}%)`;
         } else if (scrollRatio > 0.22) {
-          objs.mentionFirst.style.opacity = mentionFirst_opacity_out;
-          objs.mentionFirst.style.transform = `translateY(${mentionFirst_translateY_out}%)`;
+          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_out, currentYOffset);
+          objs.mentionFirst.style.transform = `translateY(${clacValuese(values.mentionFirst_translateY_out, currentYOffset)}%)`;
         }
         // mentionSecond 세팅
-        let mentionSecond_opacity_in = clacValuese(values.mentionSecond_opacity_in, currentYOffset);
-        let mentionSecond_opacity_out = clacValuese(values.mentionSecond_opacity_out, currentYOffset);
-        let mentionSecond_translateY_in = clacValuese(values.mentionSecond_translateY_in, currentYOffset);
-        let mentionSecond_translateY_out = clacValuese(values.mentionSecond_translateY_out, currentYOffset);
         if (scrollRatio <= 0.42) {
-          objs.mentionSecond.style.opacity = mentionSecond_opacity_in;
-          objs.mentionSecond.style.transform = `translateY(${mentionSecond_translateY_in}%)`;
+          objs.mentionSecond.style.opacity = clacValuese(values.mentionSecond_opacity_in, currentYOffset);
+          objs.mentionSecond.style.transform = `translateY(${clacValuese(values.mentionSecond_translateY_in, currentYOffset)}%)`;
         } else if (scrollRatio > 0.42) {
-          objs.mentionSecond.style.opacity = mentionSecond_opacity_out;
-          objs.mentionSecond.style.transform = `translateY(${mentionSecond_translateY_out}%)`;
+          objs.mentionSecond.style.opacity = clacValuese(values.mentionSecond_opacity_out, currentYOffset);
+          objs.mentionSecond.style.transform = `translateY(${clacValuese(values.mentionSecond_translateY_out, currentYOffset)}%)`;
         }
         // mentionThird 세팅
-        let mentionThird_opacity_in = clacValuese(values.mentionThird_opacity_in, currentYOffset);
-        let mentionThird_opacity_out = clacValuese(values.mentionThird_opacity_out, currentYOffset);
-        let mentionThird_translateY_in = clacValuese(values.mentionThird_translateY_in, currentYOffset);
-        let mentionThird_translateY_out = clacValuese(values.mentionThird_translateY_out, currentYOffset);
         if (scrollRatio <= 0.62) {
-          objs.mentionThird.style.opacity = mentionThird_opacity_in;
-          objs.mentionThird.style.transform = `translateY(${mentionThird_translateY_in}%)`;
+          objs.mentionThird.style.opacity = clacValuese(values.mentionThird_opacity_in, currentYOffset);
+          objs.mentionThird.style.transform = `translateY(${clacValuese(values.mentionThird_translateY_in, currentYOffset)}%)`;
         } else if (scrollRatio > 0.62) {
-          objs.mentionThird.style.opacity = mentionThird_opacity_out;
-          objs.mentionThird.style.transform = `translateY(${mentionThird_translateY_out}%)`;
+          objs.mentionThird.style.opacity = clacValuese(values.mentionThird_opacity_out, currentYOffset);
+          objs.mentionThird.style.transform = `translateY(${clacValuese(values.mentionThird_translateY_out, currentYOffset)}%)`;
         }
         // mentionForth 세팅
-        let mentionForth_opacity_in = clacValuese(values.mentionForth_opacity_in, currentYOffset);
-        let mentionForth_opacity_out = clacValuese(values.mentionForth_opacity_out, currentYOffset);
-        let mentionForth_translateY_in = clacValuese(values.mentionForth_translateY_in, currentYOffset);
-        let mentionForth_translateY_out = clacValuese(values.mentionForth_translateY_out, currentYOffset);
         if (scrollRatio <= 0.82) {
-          objs.mentionForth.style.opacity = mentionForth_opacity_in;
-          objs.mentionForth.style.transform = `translateY(${mentionForth_translateY_in}%)`;
+          objs.mentionForth.style.opacity = clacValuese(values.mentionForth_opacity_in, currentYOffset);
+          objs.mentionForth.style.transform = `translateY(${clacValuese(values.mentionForth_translateY_in, currentYOffset)}%)`;
         } else if (scrollRatio > 0.82) {
-          objs.mentionForth.style.opacity = mentionForth_opacity_out;
-          objs.mentionForth.style.transform = `translateY(${mentionForth_translateY_out}%)`;
+          objs.mentionForth.style.opacity = clacValuese(values.mentionForth_opacity_out, currentYOffset);
+          objs.mentionForth.style.transform = `translateY(${clacValuese(values.mentionForth_translateY_out, currentYOffset)}%)`;
         }
         break;
       case 1:

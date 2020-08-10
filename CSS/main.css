@@ -128,6 +128,15 @@ p {
   color: var(--color-black);
 }
 
+#scroll_section-third .second {
+  top: 10%;
+  left: 40%;
+}
+
+#scroll_section-third .third {
+  top: 15%;
+  left: 45%;
+}
 
 .description {
   font-size: 3.5rem;
@@ -232,6 +241,15 @@ p {
 
   #scroll_section-second p strong {
     font-size: 6rem;
+  }
+
+  #scroll_section-third .second {
+    top: 20%;
+    left: 53%;
+  }
+
+  #scroll_section-third .third {
+    left: 55%;
   }
 
   .description {
