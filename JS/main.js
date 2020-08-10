@@ -7,25 +7,18 @@
   let currentScene = 0;
   // scene 바뀌는 곳 체크
   let enterNewScene = false;
-  const sceneInfo = [{
+  const sceneInfo = [
+    {
       // scroll_section-first
       type: "sticky",
       scrollHeight: 0,
       heightNum: 5,
       objs: {
         container: document.querySelector("#scroll_section-first"),
-        mentionFirst: document.querySelector(
-          "#scroll_section-first .main_mention.first"
-        ),
-        mentionSecond: document.querySelector(
-          "#scroll_section-first .main_mention.second"
-        ),
-        mentionThird: document.querySelector(
-          "#scroll_section-first .main_mention.third"
-        ),
-        mentionForth: document.querySelector(
-          "#scroll_section-first .main_mention.forth"
-        ),
+        mentionFirst: document.querySelector("#scroll_section-first .main_mention.first"),
+        mentionSecond: document.querySelector("#scroll_section-first .main_mention.second"),
+        mentionThird: document.querySelector("#scroll_section-first .main_mention.third"),
+        mentionForth: document.querySelector("#scroll_section-first .main_mention.forth"),
       },
       values: {
         // in
@@ -34,7 +27,7 @@
           1,
           {
             start: 0.1,
-            end: 0.2
+            end: 0.2,
           },
         ],
         mentionFirst_translateY_in: [
@@ -42,14 +35,15 @@
           0,
           {
             start: 0.1,
-            end: 0.2
+            end: 0.2,
           },
         ],
         mentionSecond_opacity_in: [
           0,
-          1, {
+          1,
+          {
             start: 0.3,
-            end: 0.4
+            end: 0.4,
           },
         ],
         mentionSecond_translateY_in: [
@@ -57,14 +51,15 @@
           0,
           {
             start: 0.3,
-            end: 0.4
+            end: 0.4,
           },
         ],
         mentionThird_opacity_in: [
           0,
-          1, {
+          1,
+          {
             start: 0.5,
-            end: 0.6
+            end: 0.6,
           },
         ],
         mentionThird_translateY_in: [
@@ -72,14 +67,15 @@
           0,
           {
             start: 0.5,
-            end: 0.6
+            end: 0.6,
           },
         ],
         mentionForth_opacity_in: [
           0,
-          1, {
+          1,
+          {
             start: 0.7,
-            end: 0.8
+            end: 0.8,
           },
         ],
         mentionForth_translateY_in: [
@@ -87,7 +83,7 @@
           0,
           {
             start: 0.7,
-            end: 0.8
+            end: 0.8,
           },
         ],
         // out
@@ -96,7 +92,7 @@
           0,
           {
             start: 0.25,
-            end: 0.3
+            end: 0.3,
           },
         ],
         mentionFirst_translateY_out: [
@@ -104,7 +100,7 @@
           -20,
           {
             start: 0.25,
-            end: 0.3
+            end: 0.3,
           },
         ],
         mentionSecond_opacity_out: [
@@ -112,7 +108,7 @@
           0,
           {
             start: 0.45,
-            end: 0.5
+            end: 0.5,
           },
         ],
         mentionSecond_translateY_out: [
@@ -120,7 +116,7 @@
           -20,
           {
             start: 0.45,
-            end: 0.5
+            end: 0.5,
           },
         ],
         mentionThird_opacity_out: [
@@ -128,7 +124,7 @@
           0,
           {
             start: 0.65,
-            end: 0.7
+            end: 0.7,
           },
         ],
         mentionThird_translateY_out: [
@@ -136,7 +132,7 @@
           -20,
           {
             start: 0.65,
-            end: 0.7
+            end: 0.7,
           },
         ],
         mentionForth_opacity_out: [
@@ -144,7 +140,7 @@
           0,
           {
             start: 0.85,
-            end: 0.9
+            end: 0.9,
           },
         ],
         mentionForth_translateY_out: [
@@ -152,7 +148,7 @@
           -20,
           {
             start: 0.85,
-            end: 0.9
+            end: 0.9,
           },
         ],
       },
@@ -198,10 +194,12 @@
   function setSectionHeight() {
     // 각 scroll_section에 높이 셋팅
     for (let i = 0; i < sceneInfo.length; i++) {
-      sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
-      sceneInfo[
-        i
-      ].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+      if (sceneInfo[i].type === "sticky") {
+        sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+      } else if (sceneInfo[i].type === "normal") {
+        sceneInfo[i].scrollHeight = sceneInfo[i].objs.container.offsetHeight;
+      }
+      sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
     }
     // load나 resize될 때 현재 scene 반영하기
     // totalScrollHeight은 새로고침 될때 현재 있는 0~현재있는 페이지의 높이만큼 다 더한값이다.
@@ -223,8 +221,7 @@
     enterNewScene = false;
     // for문은 i가 1 이상일때 부터 시행
     for (let i = 0; i < currentScene; i++) {
-      prevScrollHeight =
-        prevScrollHeight + sceneInfo[currentScene].scrollHeight;
+      prevScrollHeight = prevScrollHeight + sceneInfo[currentScene].scrollHeight;
     }
     // c가 0일때 prevScrollHeight는 0,sceneInfo[currentScene].scrollHeight)는 4090이다.
     if (yOffSet > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
@@ -253,14 +250,8 @@
       const partScrollStart = values[2].start * scrollHeight;
       const partScrollEnd = values[2].end * scrollHeight;
       const partScrollHeight = partScrollEnd - partScrollStart;
-      if (
-        currentYOffset >= partScrollStart &&
-        currentYOffset <= partScrollEnd
-      ) {
-        returnValues =
-          ((currentYOffset - partScrollStart) / partScrollHeight) *
-          (values[1] - values[0]) +
-          values[0];
+      if (currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd) {
+        returnValues = ((currentYOffset - partScrollStart) / partScrollHeight) * (values[1] - values[0]) + values[0];
       } else if (currentYOffset < partScrollStart) {
         returnValues = values[0];
       } else if (currentYOffset > partScrollEnd) {
@@ -283,18 +274,10 @@
     switch (currentScene) {
       case 0:
         // mentionFirst 세팅
-        let mentionFirst_opacity_in = clacValuese(
-          values.mentionFirst_opacity_in, currentYOffset
-        );
-        let mentionFirst_opacity_out = clacValuese(
-          values.mentionFirst_opacity_out, currentYOffset
-        );
-        let mentionFirst_translateY_in = clacValuese(
-          values.mentionFirst_translateY_in, currentYOffset
-        );
-        let mentionFirst_translateY_out = clacValuese(
-          values.mentionFirst_translateY_out, currentYOffset
-        );
+        let mentionFirst_opacity_in = clacValuese(values.mentionFirst_opacity_in, currentYOffset);
+        let mentionFirst_opacity_out = clacValuese(values.mentionFirst_opacity_out, currentYOffset);
+        let mentionFirst_translateY_in = clacValuese(values.mentionFirst_translateY_in, currentYOffset);
+        let mentionFirst_translateY_out = clacValuese(values.mentionFirst_translateY_out, currentYOffset);
         if (scrollRatio <= 0.22) {
           objs.mentionFirst.style.opacity = mentionFirst_opacity_in;
           objs.mentionFirst.style.transform = `translateY(${mentionFirst_translateY_in}%)`;
@@ -303,18 +286,10 @@
           objs.mentionFirst.style.transform = `translateY(${mentionFirst_translateY_out}%)`;
         }
         // mentionSecond 세팅
-        let mentionSecond_opacity_in = clacValuese(
-          values.mentionSecond_opacity_in, currentYOffset
-        );
-        let mentionSecond_opacity_out = clacValuese(
-          values.mentionSecond_opacity_out, currentYOffset
-        );
-        let mentionSecond_translateY_in = clacValuese(
-          values.mentionSecond_translateY_in, currentYOffset
-        );
-        let mentionSecond_translateY_out = clacValuese(
-          values.mentionSecond_translateY_out, currentYOffset
-        );
+        let mentionSecond_opacity_in = clacValuese(values.mentionSecond_opacity_in, currentYOffset);
+        let mentionSecond_opacity_out = clacValuese(values.mentionSecond_opacity_out, currentYOffset);
+        let mentionSecond_translateY_in = clacValuese(values.mentionSecond_translateY_in, currentYOffset);
+        let mentionSecond_translateY_out = clacValuese(values.mentionSecond_translateY_out, currentYOffset);
         if (scrollRatio <= 0.42) {
           objs.mentionSecond.style.opacity = mentionSecond_opacity_in;
           objs.mentionSecond.style.transform = `translateY(${mentionSecond_translateY_in}%)`;
@@ -323,18 +298,10 @@
           objs.mentionSecond.style.transform = `translateY(${mentionSecond_translateY_out}%)`;
         }
         // mentionThird 세팅
-        let mentionThird_opacity_in = clacValuese(
-          values.mentionThird_opacity_in, currentYOffset
-        );
-        let mentionThird_opacity_out = clacValuese(
-          values.mentionThird_opacity_out, currentYOffset
-        );
-        let mentionThird_translateY_in = clacValuese(
-          values.mentionThird_translateY_in, currentYOffset
-        );
-        let mentionThird_translateY_out = clacValuese(
-          values.mentionThird_translateY_out, currentYOffset
-        );
+        let mentionThird_opacity_in = clacValuese(values.mentionThird_opacity_in, currentYOffset);
+        let mentionThird_opacity_out = clacValuese(values.mentionThird_opacity_out, currentYOffset);
+        let mentionThird_translateY_in = clacValuese(values.mentionThird_translateY_in, currentYOffset);
+        let mentionThird_translateY_out = clacValuese(values.mentionThird_translateY_out, currentYOffset);
         if (scrollRatio <= 0.62) {
           objs.mentionThird.style.opacity = mentionThird_opacity_in;
           objs.mentionThird.style.transform = `translateY(${mentionThird_translateY_in}%)`;
@@ -343,18 +310,10 @@
           objs.mentionThird.style.transform = `translateY(${mentionThird_translateY_out}%)`;
         }
         // mentionForth 세팅
-        let mentionForth_opacity_in = clacValuese(
-          values.mentionForth_opacity_in, currentYOffset
-        );
-        let mentionForth_opacity_out = clacValuese(
-          values.mentionForth_opacity_out, currentYOffset
-        );
-        let mentionForth_translateY_in = clacValuese(
-          values.mentionForth_translateY_in, currentYOffset
-        );
-        let mentionForth_translateY_out = clacValuese(
-          values.mentionForth_translateY_out, currentYOffset
-        );
+        let mentionForth_opacity_in = clacValuese(values.mentionForth_opacity_in, currentYOffset);
+        let mentionForth_opacity_out = clacValuese(values.mentionForth_opacity_out, currentYOffset);
+        let mentionForth_translateY_in = clacValuese(values.mentionForth_translateY_in, currentYOffset);
+        let mentionForth_translateY_out = clacValuese(values.mentionForth_translateY_out, currentYOffset);
         if (scrollRatio <= 0.82) {
           objs.mentionForth.style.opacity = mentionForth_opacity_in;
           objs.mentionForth.style.transform = `translateY(${mentionForth_translateY_in}%)`;
