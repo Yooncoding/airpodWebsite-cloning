@@ -348,6 +348,10 @@
       }
     }
     document.body.setAttribute("id", `show_scene-${currentScene}`);
+
+    // canvas 이미지 사이즈 맞추기
+    const canvasHeightRatio = window.innerHeight / 1080;
+    sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${canvasHeightRatio})`;
   }
 
   function scrollLoop() {
@@ -410,12 +414,6 @@
       case 0:
         //canvas-0 세팅
         let sequence = Math.round(clacValuese(sceneInfo[0].values.imageSequence, currentYOffset));
-        // console.log(sequence);
-        // if (sequence < 0) {
-        //   sequence = 0;
-        // } else if (sequence > 299) {
-        //   sequence = 299;
-        // }
         objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
         // mentionFirst 세팅
         if (scrollRatio <= 0.22) {
@@ -495,6 +493,5 @@
   window.addEventListener("resize", setSectionHeight);
   window.addEventListener("load", setSectionHeight);
 
-  setSectionHeight();
   setCanvasImage();
 })();

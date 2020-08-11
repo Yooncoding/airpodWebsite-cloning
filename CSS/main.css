@@ -222,7 +222,13 @@ p {
 
 .sticky_canvas {
   top: 0;
-  background-color: var(--color-temp);
+  height: 100%;
+}
+
+.sticky_canvas canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 #show_scene-0 #scroll_section-first .center_mention,
