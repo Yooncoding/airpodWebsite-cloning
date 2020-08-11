@@ -9,7 +9,7 @@
   --color-light-grey: #ddd;
   --color-grey: #888;
   --color-dark-grey: #A1A1A6;
-  --color-temp: red;
+  --color-temp: skyblue;
   /* Padding Size */
   --padding-large: 10px;
 }
@@ -44,6 +44,7 @@ p {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
   width: 100%;
   height: 44px;
   padding: 0 1rem;
@@ -53,6 +54,7 @@ p {
   position: absolute;
   top: 45px;
   left: 0;
+  z-index: 11;
   width: 100%;
   height: 52px;
   padding: 0 1rem;
@@ -216,6 +218,11 @@ p {
   position: fixed;
   left: 0;
   width: 100%;
+}
+
+.sticky_canvas {
+  top: 0;
+  background-color: var(--color-temp);
 }
 
 #show_scene-0 #scroll_section-first .center_mention,

@@ -18,8 +18,14 @@
         mentionSecond: document.querySelector("#scroll_section-first .main_mention.second"),
         mentionThird: document.querySelector("#scroll_section-first .main_mention.third"),
         mentionForth: document.querySelector("#scroll_section-first .main_mention.forth"),
+        canvas: document.querySelector("#video_canvas-0"),
+        context: document.querySelector("#video_canvas-0").getContext('2d'),
+        viedoImages: [],
       },
       values: {
+        // canvas-0
+        videoImageCount: 300,
+        imageSequence: [0, 299],
         // in
         mentionFirst_opacity_in: [
           0,
@@ -311,6 +317,14 @@
     },
   ];
 
+  function setCanvasImage() {
+    for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
+      let imgElem = new Image();
+      imgElem.src = `./video/001/IMG_${6726 + i}.JPG`;
+      sceneInfo[0].objs.viedoImages.push(imgElem);
+    }
+  }
+
   function setSectionHeight() {
     // 각 scroll_section에 높이 셋팅
     for (let i = 0; i < sceneInfo.length; i++) {
@@ -394,6 +408,15 @@
     // console.log(currentScene, currentYOffset);
     switch (currentScene) {
       case 0:
+        //canvas-0 세팅
+        let sequence = Math.round(clacValuese(sceneInfo[0].values.imageSequence, currentYOffset));
+        // console.log(sequence);
+        // if (sequence < 0) {
+        //   sequence = 0;
+        // } else if (sequence > 299) {
+        //   sequence = 299;
+        // }
+        objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
         // mentionFirst 세팅
         if (scrollRatio <= 0.22) {
           objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);;
@@ -473,4 +496,5 @@
   window.addEventListener("load", setSectionHeight);
 
   setSectionHeight();
+  setCanvasImage();
 })();
