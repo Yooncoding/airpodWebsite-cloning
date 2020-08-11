@@ -156,6 +156,7 @@ p {
 .desc_mention {
   font-weight: bold;
   width: 50%;
+  opacity: 0;
 }
 
 .pin {

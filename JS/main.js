@@ -183,8 +183,22 @@
         mentionThird: document.querySelector("#scroll_section-third .desc_mention.third"),
         pinFirst: document.querySelector("#scroll_section-third .second .pin"),
         pinSecond: document.querySelector("#scroll_section-third .third .pin"),
+        canvas: document.querySelector("#video_canvas-1"),
+        context: document.querySelector("#video_canvas-1").getContext('2d'),
+        viedoImages: [],
       },
       values: {
+        // canvas-1
+        videoImageCount: 960,
+        canvas_opacity_in: [0, 1, {
+          start: 0,
+          end: 0.1
+        }],
+        canvas_opacity_out: [1, 0, {
+          start: 0.95,
+          end: 1
+        }],
+        imageSequence: [0, 959],
         // in
         mentionFirst_opacity_in: [
           0,
@@ -327,6 +341,11 @@
       imgElem.src = `./video/001/IMG_${6726 + i}.JPG`;
       sceneInfo[0].objs.viedoImages.push(imgElem);
     }
+    for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
+      let imgElem = new Image();
+      imgElem.src = `./video/002/IMG_${7027+i}.JPG`;
+      sceneInfo[2].objs.viedoImages.push(imgElem);
+    }
   }
 
   function setSectionHeight() {
@@ -356,6 +375,7 @@
     // canvas 이미지 사이즈 맞추기
     const canvasHeightRatio = window.innerHeight / 1080;
     sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${canvasHeightRatio})`;
+    sceneInfo[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${canvasHeightRatio})`;
   }
 
   function scrollLoop() {
@@ -456,6 +476,14 @@
       case 1:
         break;
       case 2:
+        let sequence2 = Math.round(clacValuese(sceneInfo[2].values.imageSequence, currentYOffset));
+        objs.context.drawImage(objs.viedoImages[sequence2], 0, 0);
+
+        if (scrollRatio <= 0.5) {
+          objs.canvas.style.opacity = clacValuese(values.canvas_opacity_in, currentYOffset);
+        } else if (scrollRatio > 0.5) {
+          objs.canvas.style.opacity = clacValuese(values.canvas_opacity_out, currentYOffset);
+        }
         // First 세팅
         if (scrollRatio <= 0.32) {
           objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);
