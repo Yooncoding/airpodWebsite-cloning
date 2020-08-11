@@ -25,6 +25,10 @@
       values: {
         // canvas-0
         videoImageCount: 300,
+        canvas_opacity: [1, 0, {
+          start: 0.95,
+          end: 1
+        }],
         imageSequence: [0, 299],
         // in
         mentionFirst_opacity_in: [
@@ -415,9 +419,10 @@
         //canvas-0 세팅
         let sequence = Math.round(clacValuese(sceneInfo[0].values.imageSequence, currentYOffset));
         objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
+        objs.canvas.style.opacity = clacValuese(values.canvas_opacity, currentYOffset);
         // mentionFirst 세팅
         if (scrollRatio <= 0.22) {
-          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);;
+          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);
           objs.mentionFirst.style.transform = `translate3d(0, ${clacValuese(values.mentionFirst_translateY_in, currentYOffset)}%, 0)`;
         } else if (scrollRatio > 0.22) {
           objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_out, currentYOffset);
@@ -490,8 +495,10 @@
     yOffSet = window.pageYOffset;
     scrollLoop();
   });
+  window.addEventListener("load", () => {
+    setSectionHeight();
+    sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.viedoImages[0], 0, 0);
+  });
   window.addEventListener("resize", setSectionHeight);
-  window.addEventListener("load", setSectionHeight);
-
   setCanvasImage();
 })();
