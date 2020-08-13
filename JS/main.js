@@ -19,16 +19,20 @@
         mentionThird: document.querySelector("#scroll_section-first .main_mention.third"),
         mentionForth: document.querySelector("#scroll_section-first .main_mention.forth"),
         canvas: document.querySelector("#video_canvas-0"),
-        context: document.querySelector("#video_canvas-0").getContext('2d'),
+        context: document.querySelector("#video_canvas-0").getContext("2d"),
         viedoImages: [],
       },
       values: {
         // canvas-0
         videoImageCount: 300,
-        canvas_opacity: [1, 0, {
-          start: 0.95,
-          end: 1
-        }],
+        canvas_opacity: [
+          1,
+          0,
+          {
+            start: 0.95,
+            end: 1,
+          },
+        ],
         imageSequence: [0, 299],
         // in
         mentionFirst_opacity_in: [
@@ -184,20 +188,28 @@
         pinFirst: document.querySelector("#scroll_section-third .second .pin"),
         pinSecond: document.querySelector("#scroll_section-third .third .pin"),
         canvas: document.querySelector("#video_canvas-1"),
-        context: document.querySelector("#video_canvas-1").getContext('2d'),
+        context: document.querySelector("#video_canvas-1").getContext("2d"),
         viedoImages: [],
       },
       values: {
         // canvas-1
         videoImageCount: 960,
-        canvas_opacity_in: [0, 1, {
-          start: 0,
-          end: 0.1
-        }],
-        canvas_opacity_out: [1, 0, {
-          start: 0.95,
-          end: 1
-        }],
+        canvas_opacity_in: [
+          0,
+          1,
+          {
+            start: 0,
+            end: 0.1,
+          },
+        ],
+        canvas_opacity_out: [
+          1,
+          0,
+          {
+            start: 0.95,
+            end: 1,
+          },
+        ],
         imageSequence: [0, 959],
         // in
         mentionFirst_opacity_in: [
@@ -317,7 +329,7 @@
     },
     {
       // scroll_section-forth -> 요친구에 canvas들어감
-      type: "sticky",
+      type: "normal",
       scrollHeight: 0,
       heightNum: 5,
       objs: {
@@ -326,11 +338,19 @@
     },
     {
       // scroll_section-fifth
-      type: "normal",
+      type: "sticky",
       scrollHeight: 0,
       heightNum: 5, //type: "normal"에선 있으나 마나
       objs: {
         container: document.querySelector("#scroll_section-fifth"),
+        canvasMention: document.querySelector(".canvas_mention"),
+        canvas: document.querySelector(".canvas_image_blend"),
+        context: document.querySelector(".canvas_image_blend").getContext("2d"),
+        imagesPath: [
+          './images/blend-image-1.jpg',
+          './images/blend-image-2.jpg'
+        ],
+        images: []
       },
     },
   ];
@@ -343,17 +363,23 @@
     }
     for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
       let imgElem = new Image();
-      imgElem.src = `./video/002/IMG_${7027+i}.JPG`;
+      imgElem.src = `./video/002/IMG_${7027 + i}.JPG`;
       sceneInfo[2].objs.viedoImages.push(imgElem);
+    }
+    let imgElem3;
+    for (let i = 0; i < sceneInfo[4].objs.imagesPath.length; i++) {
+      imgElem3 = new Image();
+      imgElem3.src = sceneInfo[4].objs.imagesPath[i];
+      sceneInfo[4].objs.images.push(imgElem3);
     }
   }
 
   function setSectionHeight() {
     // 각 scroll_section에 높이 셋팅
     for (let i = 0; i < sceneInfo.length; i++) {
-      if (sceneInfo[i].type === 'sticky') {
+      if (sceneInfo[i].type === "sticky") {
         sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
-      } else if (sceneInfo[i].type === 'normal') {
+      } else if (sceneInfo[i].type === "normal") {
         sceneInfo[i].scrollHeight = sceneInfo[i].objs.container.offsetHeight;
       }
       sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
@@ -516,6 +542,21 @@
       case 3:
         break;
       case 4:
+        const widthRatio = window.innerWidth / objs.canvas.width;
+        const heightRatio = window.innerHeight / objs.canvas.height;
+        let canvasScaleRatio;
+        if (widthRatio <= heightRatio) {
+          // 캔버스보다 브라우저 창이 홀쭉한 경우
+          console.log("h");
+        } else {
+          // 캔버스보다 브라우저 창이 납작한 경우
+          canvasScaleRatio = widthRatio;
+          console.log("w");
+        }
+        objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objs.context.fillStyle = 'white';
+        objs.context.drawImage(objs.images[0], 0, 0);
+
         break;
     }
   }

@@ -177,6 +177,12 @@ p {
   color: var(--color-black);
 }
 
+#scroll_section-fifth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .canvas_mention {
   margin: 0 auto;
   max-width: 1000px;
