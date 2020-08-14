@@ -7,7 +7,8 @@
   let currentScene = 0;
   // scene 바뀌는 곳 체크
   let enterNewScene = false;
-  const sceneInfo = [{
+  const sceneInfo = [
+    {
       // scroll_section-first
       type: "sticky",
       scrollHeight: 0,
@@ -346,11 +347,8 @@
         canvasMention: document.querySelector(".canvas_mention"),
         canvas: document.querySelector(".canvas_image_blend"),
         context: document.querySelector(".canvas_image_blend").getContext("2d"),
-        imagesPath: [
-          './images/blend-image-1.jpg',
-          './images/blend-image-2.jpg'
-        ],
-        images: []
+        imagesPath: ["./images/blend-image-1.jpg", "./images/blend-image-2.jpg"],
+        images: [],
       },
     },
   ];
@@ -430,7 +428,7 @@
   }
 
   // 여기 들어가는 변수는 values 오브젝트
-  function clacValuese(values, currentYOffset) {
+  function calcValuese(values, currentYOffset) {
     let returnValues = 0;
     const scrollHeight = sceneInfo[currentScene].scrollHeight;
     const scrollRatio = currentYOffset / scrollHeight;
@@ -463,80 +461,80 @@
     switch (currentScene) {
       case 0:
         //canvas-0 세팅
-        let sequence = Math.round(clacValuese(sceneInfo[0].values.imageSequence, currentYOffset));
+        let sequence = Math.round(calcValuese(sceneInfo[0].values.imageSequence, currentYOffset));
         objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
-        objs.canvas.style.opacity = clacValuese(values.canvas_opacity, currentYOffset);
+        objs.canvas.style.opacity = calcValuese(values.canvas_opacity, currentYOffset);
         // mentionFirst 세팅
         if (scrollRatio <= 0.22) {
-          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);
-          objs.mentionFirst.style.transform = `translate3d(0, ${clacValuese(values.mentionFirst_translateY_in, currentYOffset)}%, 0)`;
+          objs.mentionFirst.style.opacity = calcValuese(values.mentionFirst_opacity_in, currentYOffset);
+          objs.mentionFirst.style.transform = `translate3d(0, ${calcValuese(values.mentionFirst_translateY_in, currentYOffset)}%, 0)`;
         } else if (scrollRatio > 0.22) {
-          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_out, currentYOffset);
-          objs.mentionFirst.style.transform = `translate3d(0, ${clacValuese(values.mentionFirst_translateY_out, currentYOffset)}%, 0)`;
+          objs.mentionFirst.style.opacity = calcValuese(values.mentionFirst_opacity_out, currentYOffset);
+          objs.mentionFirst.style.transform = `translate3d(0, ${calcValuese(values.mentionFirst_translateY_out, currentYOffset)}%, 0)`;
         }
         // mentionSecond 세팅
         if (scrollRatio <= 0.42) {
-          objs.mentionSecond.style.opacity = clacValuese(values.mentionSecond_opacity_in, currentYOffset);
-          objs.mentionSecond.style.transform = `translate3d(0, ${clacValuese(values.mentionSecond_translateY_in, currentYOffset)}%, 0)`;
+          objs.mentionSecond.style.opacity = calcValuese(values.mentionSecond_opacity_in, currentYOffset);
+          objs.mentionSecond.style.transform = `translate3d(0, ${calcValuese(values.mentionSecond_translateY_in, currentYOffset)}%, 0)`;
         } else if (scrollRatio > 0.42) {
-          objs.mentionSecond.style.opacity = clacValuese(values.mentionSecond_opacity_out, currentYOffset);
-          objs.mentionSecond.style.transform = `translate3d(0, ${clacValuese(values.mentionFirst_translateY_out, currentYOffset)}%, 0)`;
+          objs.mentionSecond.style.opacity = calcValuese(values.mentionSecond_opacity_out, currentYOffset);
+          objs.mentionSecond.style.transform = `translate3d(0, ${calcValuese(values.mentionFirst_translateY_out, currentYOffset)}%, 0)`;
         }
         // mentionThird 세팅
         if (scrollRatio <= 0.62) {
-          objs.mentionThird.style.opacity = clacValuese(values.mentionThird_opacity_in, currentYOffset);
-          objs.mentionThird.style.transform = `translate3d(0, ${clacValuese(values.mentionThird_translateY_in, currentYOffset)}%, 0)`;
+          objs.mentionThird.style.opacity = calcValuese(values.mentionThird_opacity_in, currentYOffset);
+          objs.mentionThird.style.transform = `translate3d(0, ${calcValuese(values.mentionThird_translateY_in, currentYOffset)}%, 0)`;
         } else if (scrollRatio > 0.62) {
-          objs.mentionThird.style.opacity = clacValuese(values.mentionThird_opacity_out, currentYOffset);
-          objs.mentionThird.style.transform = `translate3d(0, ${clacValuese(values.mentionThird_translateY_out, currentYOffset)}%, 0)`;
+          objs.mentionThird.style.opacity = calcValuese(values.mentionThird_opacity_out, currentYOffset);
+          objs.mentionThird.style.transform = `translate3d(0, ${calcValuese(values.mentionThird_translateY_out, currentYOffset)}%, 0)`;
         }
         // mentionForth 세팅
         if (scrollRatio <= 0.82) {
-          objs.mentionForth.style.opacity = clacValuese(values.mentionForth_opacity_in, currentYOffset);
-          objs.mentionForth.style.transform = `translate3d(0, ${clacValuese(values.mentionForth_translateY_in, currentYOffset)}%, 0)`;
+          objs.mentionForth.style.opacity = calcValuese(values.mentionForth_opacity_in, currentYOffset);
+          objs.mentionForth.style.transform = `translate3d(0, ${calcValuese(values.mentionForth_translateY_in, currentYOffset)}%, 0)`;
         } else if (scrollRatio > 0.82) {
-          objs.mentionForth.style.opacity = clacValuese(values.mentionForth_opacity_out, currentYOffset);
-          objs.mentionForth.style.transform = `translate3d(0, ${clacValuese(values.mentionForth_translateY_out, currentYOffset)}%, 0)`;
+          objs.mentionForth.style.opacity = calcValuese(values.mentionForth_opacity_out, currentYOffset);
+          objs.mentionForth.style.transform = `translate3d(0, ${calcValuese(values.mentionForth_translateY_out, currentYOffset)}%, 0)`;
         }
         break;
       case 1:
         break;
       case 2:
-        let sequence2 = Math.round(clacValuese(sceneInfo[2].values.imageSequence, currentYOffset));
+        let sequence2 = Math.round(calcValuese(sceneInfo[2].values.imageSequence, currentYOffset));
         objs.context.drawImage(objs.viedoImages[sequence2], 0, 0);
 
         if (scrollRatio <= 0.5) {
-          objs.canvas.style.opacity = clacValuese(values.canvas_opacity_in, currentYOffset);
+          objs.canvas.style.opacity = calcValuese(values.canvas_opacity_in, currentYOffset);
         } else if (scrollRatio > 0.5) {
-          objs.canvas.style.opacity = clacValuese(values.canvas_opacity_out, currentYOffset);
+          objs.canvas.style.opacity = calcValuese(values.canvas_opacity_out, currentYOffset);
         }
         // First 세팅
         if (scrollRatio <= 0.32) {
-          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_in, currentYOffset);
-          objs.mentionFirst.style.transform = `translate3d(0, ${clacValuese(values.mentionFirst_translateY_in, currentYOffset)}%, 0)`;
+          objs.mentionFirst.style.opacity = calcValuese(values.mentionFirst_opacity_in, currentYOffset);
+          objs.mentionFirst.style.transform = `translate3d(0, ${calcValuese(values.mentionFirst_translateY_in, currentYOffset)}%, 0)`;
         } else if (scrollRatio > 0.32) {
-          objs.mentionFirst.style.opacity = clacValuese(values.mentionFirst_opacity_out, currentYOffset);
-          objs.mentionFirst.style.transform = `translate3d(0, ${clacValuese(values.mentionFirst_translateY_out, currentYOffset)}%, 0)`;
+          objs.mentionFirst.style.opacity = calcValuese(values.mentionFirst_opacity_out, currentYOffset);
+          objs.mentionFirst.style.transform = `translate3d(0, ${calcValuese(values.mentionFirst_translateY_out, currentYOffset)}%, 0)`;
         }
         // Second 세팅
         if (scrollRatio <= 0.67) {
-          objs.mentionSecond.style.opacity = clacValuese(values.mentionSecond_opacity_in, currentYOffset);
-          objs.mentionSecond.style.transform = `translate3d(0, ${clacValuese(values.mentionSecond_translateY_in, currentYOffset)}%, 0)`;
-          objs.pinFirst.style.transform = `scaleY(${clacValuese(values.pinFirst_scaleY, currentYOffset)})`;
+          objs.mentionSecond.style.opacity = calcValuese(values.mentionSecond_opacity_in, currentYOffset);
+          objs.mentionSecond.style.transform = `translate3d(0, ${calcValuese(values.mentionSecond_translateY_in, currentYOffset)}%, 0)`;
+          objs.pinFirst.style.transform = `scaleY(${calcValuese(values.pinFirst_scaleY, currentYOffset)})`;
         } else if (scrollRatio > 0.67) {
-          objs.mentionSecond.style.opacity = clacValuese(values.mentionSecond_opacity_out, currentYOffset);
-          objs.mentionSecond.style.transform = `translate3d(0, ${clacValuese(values.mentionSecond_translateY_out, currentYOffset)}%, 0)`;
-          objs.pinFirst.style.transform = `scaleY(${clacValuese(values.pinFirst_scaleY, currentYOffset)})`;
+          objs.mentionSecond.style.opacity = calcValuese(values.mentionSecond_opacity_out, currentYOffset);
+          objs.mentionSecond.style.transform = `translate3d(0, ${calcValuese(values.mentionSecond_translateY_out, currentYOffset)}%, 0)`;
+          objs.pinFirst.style.transform = `scaleY(${calcValuese(values.pinFirst_scaleY, currentYOffset)})`;
         }
         // Third 세팅
         if (scrollRatio <= 0.93) {
-          objs.mentionThird.style.opacity = clacValuese(values.mentionThird_opacity_in, currentYOffset);
-          objs.mentionThird.style.transform = `translate3d(0, ${clacValuese(values.mentionThird_translateY_in, currentYOffset)}%, 0)`;
-          objs.pinSecond.style.transform = `scaleY(${clacValuese(values.pinSecond_scaleY, currentYOffset)})`;
+          objs.mentionThird.style.opacity = calcValuese(values.mentionThird_opacity_in, currentYOffset);
+          objs.mentionThird.style.transform = `translate3d(0, ${calcValuese(values.mentionThird_translateY_in, currentYOffset)}%, 0)`;
+          objs.pinSecond.style.transform = `scaleY(${calcValuese(values.pinSecond_scaleY, currentYOffset)})`;
         } else if (scrollRatio > 0.93) {
-          objs.mentionThird.style.opacity = clacValuese(values.mentionThird_opacity_out, currentYOffset);
-          objs.mentionThird.style.transform = `translate3d(0, ${clacValuese(values.mentionThird_translateY_out, currentYOffset)}%, 0)`;
-          objs.pinSecond.style.transform = `scaleY(${clacValuese(values.pinSecond_scaleY, currentYOffset)})`;
+          objs.mentionThird.style.opacity = calcValuese(values.mentionThird_opacity_out, currentYOffset);
+          objs.mentionThird.style.transform = `translate3d(0, ${calcValuese(values.mentionThird_translateY_out, currentYOffset)}%, 0)`;
+          objs.pinSecond.style.transform = `scaleY(${calcValuese(values.pinSecond_scaleY, currentYOffset)})`;
         }
         break;
       case 3:
@@ -554,7 +552,7 @@
           console.log("w");
         }
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
-        objs.context.fillStyle = 'white';
+        objs.context.fillStyle = "white";
         objs.context.drawImage(objs.images[0], 0, 0);
 
         break;
