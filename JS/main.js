@@ -379,6 +379,14 @@
     },
   ];
 
+  function checkNavbar() {
+    if (yOffSet > 44) {
+      document.body.classList.add("local_navbar-sticky");
+    } else {
+      document.body.classList.remove("local_navbar-sticky");
+    }
+  }
+
   function setCanvasImage() {
     for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
       let imgElem = new Image();
@@ -693,6 +701,7 @@
   window.addEventListener("scroll", () => {
     yOffSet = window.pageYOffset;
     scrollLoop();
+    checkNavbar();
   });
   window.addEventListener("load", () => {
     setSectionHeight();
