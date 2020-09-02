@@ -89,7 +89,7 @@ p {
 }
 
 .scroll_section {
-  border: 3px solid var(--color-temp);
+  position: relative;
   padding-top: 50vh;
 }
 
@@ -184,7 +184,7 @@ p {
 }
 
 .canvas_mention {
-  margin: 0 auto;
+  margin: -8em auto 0;
   max-width: 1000px;
   padding: 0 1rem;
   font-size: 1.2rem;
@@ -241,6 +241,11 @@ p {
   left: 50%;
 }
 
+.canvas_image_blend.sticky {
+  position: fixed;
+  top: 0;
+}
+
 #show_scene-0 #scroll_section-first .center_mention,
 #show_scene-1 #scroll_section-second .center_mention,
 #show_scene-2 #scroll_section-third .center_mention,
@@ -259,6 +264,7 @@ p {
   }
 
   #scroll_section-second p {
+    padding: 0;
     font-size: 2rem;
   }
 
@@ -288,10 +294,13 @@ p {
   }
 
   .simple_mention {
+    width: 1000px;
+    padding: 0;
     font-size: 4vw;
   }
 
   .canvas_mention {
+    padding: 0;
     font-size: 2rem;
   }
 }
