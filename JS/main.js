@@ -7,6 +7,11 @@
   let currentScene = 0;
   // scene 바뀌는 곳 체크
   let enterNewScene = false;
+  let acc = 0.1;
+  let delayedYOffset = 0;
+  let rafId;
+  let rafState;
+
   const sceneInfo = [{
       // scroll_section-first
       type: "sticky",
@@ -445,12 +450,12 @@
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
     // c가 0일때 prevScrollHeight는 0,sceneInfo[currentScene].scrollHeight)는 4090이다.
-    if (yOffSet > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+    if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       enterNewScene = true;
       currentScene++;
       document.body.setAttribute("id", `show_scene-${currentScene}`);
     }
-    if (yOffSet < prevScrollHeight) {
+    if (delayedYOffset < prevScrollHeight) {
       if (yOffSet == 0) return;
       enterNewScene = true;
       currentScene--;
@@ -485,6 +490,37 @@
     return returnValues;
   }
 
+  function loop() {
+    delayedYOffset = delayedYOffset + (yOffSet - delayedYOffset) * acc;
+    if (!enterNewScene) {
+      if (currentScene === 0) {
+        const objs = sceneInfo[currentScene].objs;
+        const values = sceneInfo[currentScene].values;
+        const currentYOffset = delayedYOffset - prevScrollHeight;
+
+        let sequence = Math.round(calcValuese(values.imageSequence, currentYOffset));
+        if (objs.viedoImages[sequence]) {
+          objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
+        }
+      } else if (currentScene === 2) {
+        const objs = sceneInfo[currentScene].objs;
+        const values = sceneInfo[currentScene].values;
+        const currentYOffset = delayedYOffset - prevScrollHeight;
+
+        let sequence2 = Math.round(calcValuese(values.imageSequence, currentYOffset));
+        if (objs.viedoImages[sequence2]) {
+          objs.context.drawImage(objs.viedoImages[sequence2], 0, 0);
+        }
+      }
+    }
+    rafId = requestAnimationFrame(loop);
+
+    if (Math.abs(yOffSet - delayedYOffset) < 1) {
+      cancelAnimationFrame(rafId);
+      rafState = false;
+    }
+  }
+
   function playAnimation() {
     const objs = sceneInfo[currentScene].objs;
     const values = sceneInfo[currentScene].values;
@@ -495,8 +531,8 @@
     switch (currentScene) {
       case 0:
         //canvas-0 세팅
-        let sequence = Math.round(calcValuese(sceneInfo[0].values.imageSequence, currentYOffset));
-        objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
+        // let sequence = Math.round(calcValuese(sceneInfo[0].values.imageSequence, currentYOffset));
+        // objs.context.drawImage(objs.viedoImages[sequence], 0, 0);
         objs.canvas.style.opacity = calcValuese(values.canvas_opacity, currentYOffset);
         // mentionFirst 세팅
         if (scrollRatio <= 0.22) {
@@ -534,8 +570,8 @@
       case 1:
         break;
       case 2:
-        let sequence2 = Math.round(calcValuese(sceneInfo[2].values.imageSequence, currentYOffset));
-        objs.context.drawImage(objs.viedoImages[sequence2], 0, 0);
+        // let sequence2 = Math.round(calcValuese(values.imageSequence, currentYOffset));
+        // objs.context.drawImage(objs.viedoImages[sequence2], 0, 0);
 
         if (scrollRatio <= 0.5) {
           objs.canvas.style.opacity = calcValuese(values.canvas_opacity_in, currentYOffset);
@@ -700,6 +736,10 @@
   }
   window.addEventListener("scroll", () => {
     yOffSet = window.pageYOffset;
+    if (!rafState) {
+      rafState = true;
+      rafId = requestAnimationFrame(loop);
+    }
     scrollLoop();
     checkNavbar();
   });
