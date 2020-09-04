@@ -747,6 +747,13 @@
     setSectionHeight();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.viedoImages[0], 0, 0);
   });
-  window.addEventListener("resize", setSectionHeight);
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) {
+      setSectionHeight();
+    }
+    sceneInfo[4].values.rectStartY = 0;
+  });
+  window.addEventListener("orientationchange", setSectionHeight());
+
   setCanvasImage();
 })();

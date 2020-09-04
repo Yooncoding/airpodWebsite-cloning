@@ -260,6 +260,61 @@ p {
   display: block;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--color-white);
+  opacity: 1;
+  transition: 0.5s
+}
+
+.before-loading .loading {
+  opacity: 0;
+}
+
+@keyframes loading-spin-ani {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-circle {
+  animation: loading-spin-ani 3s infinite;
+  width: 54px;
+  height: 54px;
+}
+
+@keyframes loading-circle-ani {
+  0% {
+    stroke-dashoffset: 157;
+  }
+
+  75% {
+    stroke-dashoffset: -147;
+  }
+
+  100% {
+    stroke-dashoffset: -157;
+  }
+}
+
+.loading-circle circle {
+  stroke: var(--color-black);
+  stroke-width: 4;
+  /* getTotalLength()를 이용하여 원의 둘레 구할 수 있음 */
+  stroke-dasharray: 157;
+  stroke-dashoffset: 0;
+  fill: transparent;
+  animation: loading-circle-ani 1s infinite;
+}
+
 /* DeskTop Responsive */
 @media (min-width:1024px) {
   #scroll_section-first h1 {
