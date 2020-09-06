@@ -8,14 +8,14 @@
   --color-white: #ffffff;
   --color-light-grey: #ddd;
   --color-grey: #888;
-  --color-dark-grey: #A1A1A6;
+  --color-dark-grey: #a1a1a6;
   --color-temp: skyblue;
   /* Padding Size */
   --padding-large: 10px;
 }
 
 html {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: var(--font-basic);
 }
 
@@ -65,6 +65,10 @@ p {
   position: fixed;
   top: 0px;
   background-color: rgba(255, 255, 255, 0.1);
+  /* 아이폰 용 navbar 뿌옇게 처리 */
+  -webkit-backdrop-filter: saturate(180%) blur(15px);
+  /* firefox 용 navbar 뿌옇게 처리 */
+  -moz-backdrop-filter: saturate(180%) blur(15px);
   backdrop-filter: saturate(180%) blur(15px);
 }
 
@@ -271,12 +275,21 @@ p {
   right: 0;
   z-index: 100;
   background-color: var(--color-white);
-  opacity: 1;
-  transition: 0.5s
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.before-loading .container {
+  display: none;
 }
 
 .before-loading .loading {
-  opacity: 0;
+  opacity: 1;
+}
+
+body.before-loading {
+  /* 스크롤이 생기는 이유는 contents의 양이 window보다 많기 때문이다. 따라서 스크롤을 막기위해서 넘치는 부분을 잘라줘야 한다. */
+  overflow: hidden;
 }
 
 @keyframes loading-spin-ani {
@@ -315,8 +328,13 @@ p {
   animation: loading-circle-ani 1s infinite;
 }
 
+.container {
+  /* 모바일에서 가로스크롤 방지 */
+  overflow-x: hidden;
+}
+
 /* DeskTop Responsive */
-@media (min-width:1024px) {
+@media (min-width: 1024px) {
   #scroll_section-first h1 {
     font-size: 9vw;
   }

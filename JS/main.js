@@ -734,26 +734,53 @@
         break;
     }
   }
-  window.addEventListener("scroll", () => {
-    yOffSet = window.pageYOffset;
-    if (!rafState) {
-      rafState = true;
-      rafId = requestAnimationFrame(loop);
-    }
-    scrollLoop();
-    checkNavbar();
-  });
+
   window.addEventListener("load", () => {
+    document.body.classList.remove("before-loading");
     setSectionHeight();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.viedoImages[0], 0, 0);
-  });
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 900) {
-      setSectionHeight();
-    }
-    sceneInfo[4].values.rectStartY = 0;
-  });
-  window.addEventListener("orientationchange", setSectionHeight());
 
+    yOffSet = window.pageYOffset;
+    let tempYOffset = yOffSet;
+    let tempScrollCount = 0;
+    if (yOffSet > 10) {
+      let siId = setInterval(() => {
+        window.scrollTo(0, tempYOffset);
+        tempYOffset += 5;
+
+        if (tempScrollCount > 20) {
+          clearInterval(siId);
+        }
+        tempScrollCount++;
+      }, 20);
+    }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        window.location.reload();
+        setSectionHeight();
+        sceneInfo[4].values.rectStartY = 0;
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      yOffSet = window.pageYOffset;
+      if (!rafState) {
+        rafState = true;
+        rafId = requestAnimationFrame(loop);
+      }
+      scrollLoop();
+      checkNavbar();
+    });
+    window.addEventListener("orientationchange", () => {
+      window.location.reload();
+      // 가로세로 전환 시 살짝 딜레이
+      setTimeout(setSectionHeight, 500);
+    });
+  });
+
+
+  document.querySelector('.loading').addEventListener('transitionend', (e) => {
+    document.body.removeChild(e.currentTarget);
+  });
   setCanvasImage();
 })();
